@@ -1,0 +1,17 @@
+<div class="sign-up-container d-flex flex-column mx-auto w-50 justify-content-center align-items-center">
+    <div class="sign-up-box d-flex w-100 justify-content-center flex-column py-5">
+        <h3 class="text-center mb-5 py-2">Sign Up to Safe Vault</h3>
+        <form class="d-flex flex-column w-50 mx-auto" onsubmit="return false">
+            <span>Enter Username:</span>
+            <input type = "text" class="mb-4"/>
+            <span>Enter Password:</span>
+            <input type = "text" class="mb-4"/>
+            <span>Enter Password Again:</span>
+            <input type = "text" class="mb-4"/>
+            <span>
+                <input type = "submit" value="SignUp" class="mb-4 px-3 py-2 sign-me-up" onclick="signUp()" />
+            </span>
+        </form>
+        <p class="back-to-login" onclick="loadLogIn()">back</p>
+    </div>
+</div>

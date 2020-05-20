@@ -1,0 +1,94 @@
+body{
+    background-color: #261C1F;
+}
+
+#main-container .log-in-container{
+    height: 100vh;
+}
+#main-container .log-in-container .log-in-box{
+    background-color: #0f0a0b;
+    border-radius: 5px;
+}
+#main-container .log-in-container .log-in-box h3{
+    font-family: 'Montserrat-Bold';
+    color: #FED766;
+}
+#main-container .log-in-container .log-in-box form span{
+    font-size: 18px;
+    font-family: 'Montserrat-Regular';
+    color: #80EDCC;
+}
+#main-container .log-in-container .log-in-box form input{
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #FED766;
+}
+#main-container .log-in-container .log-in-box form .log-me-in{
+    background-color: #FED766;
+    border: 1px solid #FED766;
+    cursor: pointer;
+    transition: 0.5s all;
+    color: #0f0a0b;
+    border-radius: 5px;
+}
+#main-container .log-in-container .log-in-box form .log-me-in:hover{
+    background-color: #0f0a0b ;
+    color: #FED766;
+}
+#main-container .log-in-container .log-in-box p{
+    color: white;
+    font-size: 13px;
+}
+#main-container .log-in-container .log-in-box p span{
+    color: #80EDCC;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+/* Sign up screen starts here */
+#main-container .sign-up-container{
+    height: 100vh;
+}
+#main-container .sign-up-container .sign-up-box{
+    background-color: #0f0a0b;
+    border-radius: 5px;
+    position: relative;
+}
+#main-container .sign-up-container .sign-up-box h3{
+    font-family: 'Montserrat-Bold';
+    color: #FED766;
+}
+#main-container .sign-up-container .sign-up-box form span{
+    font-size: 18px;
+    font-family: 'Montserrat-Regular';
+    color: #80EDCC;
+}
+#main-container .sign-up-container .sign-up-box form input{
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #FED766;
+}
+#main-container .sign-up-container .sign-up-box form .sign-me-up{
+    background-color: #FED766;
+    border: 1px solid #FED766;
+    cursor: pointer;
+    transition: 0.5s all;
+    color: #0f0a0b;
+    border-radius: 5px;
+}
+#main-container .sign-up-container .sign-up-box form .sign-me-up:hover{
+    background-color: #0f0a0b ;
+    color: #FED766;
+}
+#main-container .sign-up-container .sign-up-box .back-to-login{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: #80EDCC;
+    transition: 0.5s all;
+    cursor: pointer;
+}
+#main-container .sign-up-container .sign-up-box .back-to-login:hover{
+    color: #FED766;
+}
+/* Sign up screen ends here */

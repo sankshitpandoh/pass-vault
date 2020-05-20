@@ -1,0 +1,15 @@
+<div class="log-in-container d-flex flex-column mx-auto w-50 justify-content-center align-items-center">
+    <div class="log-in-box d-flex w-100 justify-content-center flex-column py-5">
+        <h3 class="text-center mb-5 py-2">Log in to Safe Vault</h3>
+        <form class="d-flex flex-column w-50 mx-auto" onsubmit="return false">
+            <span>Username:</span>
+            <input type = "text" class="mb-4"/>
+            <span>Password</span>
+            <input type = "password" class="mb-4" />
+            <span>
+                <input type = "submit" value="Log in" class="mb-4 px-3 py-2 log-me-in" onclick="logIn()" />
+            </span>
+        </form>
+        <p class="mx-auto">Don't have an account? <span onclick="loadSignUp()">Click here</span> to SignUp</p>
+    </div>
+</div>
