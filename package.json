@@ -1,0 +1,22 @@
+{
+  "name": "pass-vault",
+  "version": "1.0.0",
+  "description": "A password manager web app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sankshitpandoh/pass-vault.git"
+  },
+  "author": "Sankshit Pandoh",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sankshitpandoh/pass-vault/issues"
+  },
+  "homepage": "https://github.com/sankshitpandoh/pass-vault#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
