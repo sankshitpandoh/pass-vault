@@ -87,8 +87,10 @@ body{
     color: #80EDCC;
     transition: 0.5s all;
     cursor: pointer;
+    font-size: 15px;
 }
 #main-container .sign-up-container .sign-up-box .back-to-login:hover{
     color: #FED766;
+    transform: scale(1.25);
 }
 /* Sign up screen ends here */
