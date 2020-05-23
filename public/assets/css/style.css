@@ -70,6 +70,7 @@ body{
     background-color: transparent;
     border: none;
     border-bottom: 1px solid #FED766;
+    color: white;
 }
 #main-container .sign-up-container .sign-up-box form .sign-me-up{
     background-color: #FED766;

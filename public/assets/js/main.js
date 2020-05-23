@@ -45,7 +45,7 @@ function logIn(){
             user : uName,
             pass : password
         }
-        console.log(logDetails)
+        /* Post request to server to check if the user exists or not */
         let xhttp = new XMLHttpRequest();
         xhttp.open("POST", "http://localhost:3000/logInAttempt" , true);
         xhttp.setRequestHeader("Content-Type","application/json; charset=utf-8");
@@ -53,12 +53,62 @@ function logIn(){
         xhttp.onreadystatechange = function(){
             if(this.readyState == 4 && this.status == 200){
                 if(this.response == "false"){
+                    /* If user doesn't exits */
                     alert("User doesn't exist, please try again or if a new user, sign Up for an account");
                     document.getElementById("user-name").value = "";
                     document.getElementById("password").value = "";
                 }
                 if(this.response == "true"){
+                    /* If user exits and is verified */
                     console.log("we going in homie");
+                }
+            }
+        }
+    }
+}
+
+/* function triggered when user tries to sign up */
+function signUp(){
+    let uName = document.getElementById("user-name").value;
+    let password = document.getElementById("password").value;
+    let passwordCheck = document.getElementById("password-check").value;
+
+    /* Some validation */
+    if(isEmpty(uName)){
+        alert("UserName field can't be empty");
+    }
+    else if(isEmpty(password)){
+        alert("passwrd field cannot be empty");
+    }
+    else if(password.length < 6){
+        alert("password length must be greater than 5 ")
+    }
+    else if(isEmpty(passwordCheck)){
+        alert("Confirm your password please");
+    }
+    else if(password != passwordCheck){
+        alert("Password's don't match");
+        document.getElementById("password-check").value = "";
+    }
+    else{
+        let uDetails = {
+            user : uName,
+            pass : password
+        }
+        let xhttp = new XMLHttpRequest();
+        xhttp.open("POST", "http://localhost:3000/signMeUp" , true);
+        xhttp.setRequestHeader("Content-Type","application/json; charset=utf-8");
+        xhttp.send((JSON.stringify(uDetails)));
+        xhttp.onreadystatechange = function(){
+            if(this.readyState == 4 && this.status == 200){
+                if(this.response == "alreadyUser"){
+                    alert("An account with same userName already exits, pick a different userName");
+                    document.getElementById("user-name").value = "";
+                    document.getElementById("password").value = "";
+                    document.getElementById("password-check").value = "";
+                }
+                if(this.response == "success"){
+                    console.log("Account Generated!");
                 }
             }
         }
