@@ -81,7 +81,7 @@ function signUp(){
         alert("passwrd field cannot be empty");
     }
     else if(password.length < 6){
-        alert("password length must be greater than 5 ")
+        alert("password length must be greater than 5 ");
     }
     else if(isEmpty(passwordCheck)){
         alert("Confirm your password please");

@@ -23,24 +23,25 @@ app.post("/logInAttempt" , function(req,res){
 
     /* Hashing the password */
     let hashPwd = crypto.createHash('sha1').update(password).digest('hex');
+    console.log(hashPwd);
     let exist = false;
     fs.readFile('./data/userInfo.json' , function(err, Data){
         let dataArray = JSON.parse(Data);
 
         /* Checking if the user exists */
         for(let i = 0; i < dataArray.length; i++){
-            if(dataArray[i].userName === uName && dataArray[i].password == hashPwd){
+            if(dataArray[i].userName === uName && dataArray[i].password === hashPwd){
                 exist = true;
                 break;
             }
+        }
+        if(exist === true){
+            res.send("true");
+        }
+        else{
+            res.send("false");
         }        
     });
-    if(exist === true){
-        res.send("true");
-    }
-    else{
-        res.send("false");
-    }
 })
 
 /* API called when user attempts to signUp */
@@ -52,7 +53,7 @@ app.post("/signMeUp", function(req, res){
         let dataArray = JSON.parse(Data);
         /* Checking if userName is not used before */
         for(let i = 0; i < dataArray.length; i++){
-            if(dataArray[i].userNameCheck === uName){
+            if(dataArray[i].userName === uName){
                 userNameCheck = false;
                 break;
             }
