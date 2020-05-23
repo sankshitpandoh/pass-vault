@@ -1,4 +1,8 @@
+/* loads log in screen first */
 loadLogIn();
+
+/* Remove UserName from localStorage if there is one saved */
+localStorage.removeItem("UserName");
 
 /* Function that calls login page layout  */
 function loadLogIn(){
@@ -59,8 +63,9 @@ function logIn(){
                     document.getElementById("password").value = "";
                 }
                 if(this.response == "true"){
-                    /* If user exits and is verified */
-                    console.log("we going in homie");
+                    /* If user exits and is verified load homePage */
+                    localStorage.setItem("UserName", uName);
+                    loadHomePage();
                 }
             }
         }
@@ -113,4 +118,17 @@ function signUp(){
             }
         }
     }
+}
+
+/* function that loads the home page */
+function loadHomePage(){
+    let request = new XMLHttpRequest;
+    request.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+            document.getElementById("main-container").innerHTML = this.responseText;
+            document.getElementById("user-name").innerHTML = localStorage.getItem("UserName");
+        }
+    }
+    request.open("GET", "./pages/homePage.html", true);
+    request.send();
 }

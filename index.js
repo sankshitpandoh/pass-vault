@@ -23,7 +23,6 @@ app.post("/logInAttempt" , function(req,res){
 
     /* Hashing the password */
     let hashPwd = crypto.createHash('sha1').update(password).digest('hex');
-    console.log(hashPwd);
     let exist = false;
     fs.readFile('./data/userInfo.json' , function(err, Data){
         let dataArray = JSON.parse(Data);

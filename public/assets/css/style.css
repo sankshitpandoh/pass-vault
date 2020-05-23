@@ -98,3 +98,33 @@ body{
     transform: scale(1.25);
 }
 /* Sign up screen ends here */
+
+/* Home page css starts from here */
+#main-container .display-pannel{
+    background-color: #5D737E;
+    height: 100vh;
+}
+#main-container .display-pannel .add-password-container{
+    background-color: #000;
+}
+#main-container .display-pannel .add-password-container input{
+    border: none;
+    border-bottom: 1px solid #FED766;
+    background-color: transparent;
+    width: 40%;
+}
+#main-container .display-pannel .add-password-container input:nth-child(3){
+    background-color: #FED766;
+    border: 1px solid #FED766;
+    width: 15%;
+    cursor: pointer;
+    transition: 0.5s all;
+}
+#main-container .display-pannel .add-password-container input:nth-child(3):hover{
+    background-color: #000;
+    width: 15%;
+    cursor: pointer;
+}
+
+
+/* Home page css ends here */
