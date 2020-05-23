@@ -2,6 +2,7 @@ body{
     background-color: #261C1F;
 }
 
+/* log in screen starts here */
 #main-container .log-in-container{
     height: 100vh;
 }
@@ -22,6 +23,7 @@ body{
     background-color: transparent;
     border: none;
     border-bottom: 1px solid #FED766;
+    color: white;
 }
 #main-container .log-in-container .log-in-box form .log-me-in{
     background-color: #FED766;
@@ -44,6 +46,7 @@ body{
     text-decoration: underline;
     cursor: pointer;
 }
+/* log in screen ends here */
 
 /* Sign up screen starts here */
 #main-container .sign-up-container{
