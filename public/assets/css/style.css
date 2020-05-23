@@ -2,6 +2,7 @@ body{
     background-color: #261C1F;
 }
 
+/* log in screen starts here */
 #main-container .log-in-container{
     height: 100vh;
 }
@@ -22,6 +23,7 @@ body{
     background-color: transparent;
     border: none;
     border-bottom: 1px solid #FED766;
+    color: white;
 }
 #main-container .log-in-container .log-in-box form .log-me-in{
     background-color: #FED766;
@@ -44,6 +46,7 @@ body{
     text-decoration: underline;
     cursor: pointer;
 }
+/* log in screen ends here */
 
 /* Sign up screen starts here */
 #main-container .sign-up-container{
@@ -67,6 +70,7 @@ body{
     background-color: transparent;
     border: none;
     border-bottom: 1px solid #FED766;
+    color: white;
 }
 #main-container .sign-up-container .sign-up-box form .sign-me-up{
     background-color: #FED766;
@@ -87,8 +91,10 @@ body{
     color: #80EDCC;
     transition: 0.5s all;
     cursor: pointer;
+    font-size: 15px;
 }
 #main-container .sign-up-container .sign-up-box .back-to-login:hover{
     color: #FED766;
+    transform: scale(1.25);
 }
 /* Sign up screen ends here */
