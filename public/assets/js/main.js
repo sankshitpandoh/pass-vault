@@ -138,3 +138,33 @@ function loadHomePage(){
     request.open("GET", "./pages/homePage.html", true);
     request.send();
 }
+
+/* function that sends data back to server to encrypt */
+function savePassword(){
+    let cName = document.getElementById("site-name-field").value;
+    let pass = document.getElementById("site-pass").value;
+
+    /* some validation */
+    if(isEmpty(cName)){
+        alert("please fill web client field. Can't store empty passwords");
+    }
+    else if(isEmpty(pass)){
+        alert("No password entered, can't encrypt empty field");
+    }
+    else{
+        let dataObj = {
+            client : cName,
+            password : pass,
+            userId : localStorage.getItem("uId")
+        }
+        let xhttp = new XMLHttpRequest();
+        xhttp.open("POST", "http://localhost:3000/storePassword" , true);
+        xhttp.setRequestHeader("Content-Type","application/json; charset=utf-8");
+        xhttp.send((JSON.stringify(dataObj)));
+        xhttp.onreadystatechange = function(){
+            if(this.response == "success"){
+                console.log("sucessfully stored")
+            }
+        }
+    }
+}

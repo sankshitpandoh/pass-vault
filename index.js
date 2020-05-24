@@ -75,7 +75,8 @@ app.post("/signMeUp", function(req, res){
             let userObj ={
                 userName : uName,
                 password : hashPwd,
-                uId : makeId()
+                uId : makeId(),
+                storePasswords : []
             }
             dataArray.push(userObj);
             fs.writeFile("./data/userInfo.json", JSON.stringify(dataArray), function(err){
@@ -97,6 +98,54 @@ function makeId(){
     }
     return result;
 }
+
+/* Password processing functionality starts from here */
+
+/* API called when user submits a password */
+app.post("/storePassword" , function(req,res){
+    /* Storing encrpyed password in variable password */
+    let password = encryptPass(req.body);
+
+    /* Storing details in json file */
+    fs.readFile('./data/userInfo.json' , function(err, Data){
+        let dataArray = JSON.parse(Data);
+        for(let i = 1; i < dataArray.length; i++){
+            if(dataArray[i].uId === req.body.userId){
+                let passObj = {
+                    client : req.body.client,
+                    password : password
+                }
+                dataArray[i].storePasswords.push(passObj);
+            }
+        }
+        fs.writeFile("./data/userInfo.json", JSON.stringify(dataArray), function(err){
+            if (err) throw err;
+            console.log('Password sucessfully added');
+            res.send("successfully stored");
+        });
+    })
+    
+});
+
+/* function that encrypts user data */
+function encryptPass(x){
+    
+    /* Key used is user ID */
+    const key = x.userId;
+    let cipher = crypto.createCipher('aes-256-cbc',key);
+    let cryptedPass = cipher.update(x.password,'utf8','hex');
+    cryptedPass += cipher.final('hex');
+    return cryptedPass;
+}
+
+    // decrptPass(x, crypted);
+// function decrptPass(x , y){
+//     const key = x.userId;
+//     var decipher = crypto.createDecipher('aes-256-cbc',key)
+//     var dec = decipher.update(y,'hex','utf8')
+//     dec += decipher.final('utf8')
+//     console.log(dec)
+// }
 
 /* To do 
 uuid for each user to encrpy passwords with
