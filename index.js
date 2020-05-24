@@ -64,14 +64,29 @@ app.post("/signMeUp", function(req, res){
             let hashPwd = crypto.createHash('sha1').update(password).digest('hex');
             let userObj ={
                 userName : uName,
-                password : hashPwd
+                password : hashPwd,
+                uId : makeId()
             }
             dataArray.push(userObj);
             fs.writeFile("./data/userInfo.json", JSON.stringify(dataArray), function(err){
                 if (err) throw err;
-                console.log('User was sucessfully registered')
+                console.log('User was sucessfully registered');
+                res.send("success");
             });
-            res.send("success");
         }
     });
 })
+
+function makeId(){
+    let result = '';
+    let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let charactersLength = characters.length;
+    for(let i = 0; i < 10; i++){
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+}
+
+/* To do 
+uuid for each user to encrpy passwords with
+improve homepage layout */

@@ -113,7 +113,9 @@ function signUp(){
                     document.getElementById("password-check").value = "";
                 }
                 if(this.response == "success"){
-                    console.log("Account Generated!");
+                    // console.log("Account Generated!");
+                    alert("Account successfullt created, login to proceed");
+                    loadLogIn()
                 }
             }
         }

@@ -112,6 +112,7 @@ body{
     border-bottom: 1px solid #FED766;
     background-color: transparent;
     width: 40%;
+    color: #fff;
 }
 #main-container .display-pannel .add-password-container input:nth-child(3){
     background-color: #FED766;
@@ -119,12 +120,16 @@ body{
     width: 15%;
     cursor: pointer;
     transition: 0.5s all;
+    font-family: 'Montserrat-Bold';
+    color: #000;
 }
 #main-container .display-pannel .add-password-container input:nth-child(3):hover{
     background-color: #000;
     width: 15%;
     cursor: pointer;
+    color: #FED766;
 }
-
-
+#main-container .display-pannel .add-password-container input::placeholder{
+    color: #FED766;
+}
 /* Home page css ends here */
