@@ -3,6 +3,8 @@ loadLogIn();
 
 /* Remove UserName from localStorage if there is one saved */
 localStorage.removeItem("UserName");
+/* Remove UniqueId from localStorage if there is one saved */
+localStorage.removeItem("uId");
 
 /* Function that calls login page layout  */
 function loadLogIn(){
@@ -56,6 +58,7 @@ function logIn(){
         xhttp.send((JSON.stringify(logDetails)));
         xhttp.onreadystatechange = function(){
             if(this.readyState == 4 && this.status == 200){
+                /* parsing the response from server into a js Object */
                 let serverResponse = JSON.parse(this.response) 
                 if(serverResponse.status === false){
                     /* If user doesn't exits */
@@ -115,9 +118,8 @@ function signUp(){
                     document.getElementById("password-check").value = "";
                 }
                 if(this.response == "success"){
-                    // console.log("Account Generated!");
                     alert("Account successfullt created, login to proceed");
-                    loadLogIn()
+                    loadLogIn();
                 }
             }
         }
