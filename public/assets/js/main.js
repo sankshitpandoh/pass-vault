@@ -165,9 +165,6 @@ function savePassword(){
             if(this.response == "success"){
                 console.log("sucessfully stored")
             }
-            else{
-                alert("Some error occured");
-            }
         }
     }
 }
