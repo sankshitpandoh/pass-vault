@@ -132,4 +132,23 @@ body{
 #main-container .display-pannel .add-password-container input::placeholder{
     color: #FED766;
 }
+#main-container .display-pannel #data-container .no-data{
+    color: #fff;
+}
+#main-container .display-pannel #data-container .single-pass-container{
+    height: 40px;
+    overflow-y: hidden;
+    background-color: #000;
+    color: white;
+    cursor: pointer;
+}
+#main-container .display-pannel #data-container .single-pass-container h3{
+    font-family: 'Montserrat-Regular';
+}
+#main-container .display-pannel #data-container .single-pass-container p{
+    font-family: 'Montserrat-Light';
+}
+#main-container .display-pannel #data-container .single-pass-container p span{
+    font-family: 'Montserrat-Bold';
+}
 /* Home page css ends here */

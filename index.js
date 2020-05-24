@@ -99,6 +99,27 @@ function makeId(){
     return result;
 }
 
+/* API called when user data is being requested */
+app.post("/getData" , function(req, res){
+    let passArray = [];
+    fs.readFile('./data/userInfo.json' , function(err, Data){
+        let dataArray = JSON.parse(Data);
+        for(let i = 1; i < dataArray.length; i++){
+            if(dataArray[i].uId === req.body.userId){
+                for(let j = 0; j < dataArray[i].storePasswords.length; j++){
+                    passArray.push(dataArray[i].storePasswords[j]);
+                }
+            }
+        }
+        let responseObject = {
+            dataArray : passArray,
+            status : true
+        }
+        console.log(responseObject);
+        res.json(responseObject);
+    })
+})
+
 /* Password processing functionality starts from here */
 
 /* API called when user submits a password */
@@ -121,7 +142,7 @@ app.post("/storePassword" , function(req,res){
         fs.writeFile("./data/userInfo.json", JSON.stringify(dataArray), function(err){
             if (err) throw err;
             console.log('Password sucessfully added');
-            res.send("successfully stored");
+            res.send("success");
         });
     })
     
@@ -139,8 +160,9 @@ function encryptPass(x){
 }
 
     // decrptPass(x, crypted);
-// function decrptPass(x , y){
-//     const key = x.userId;
+    // let decryptedPassArray = decryptPass(passArray , req.body.userId);
+// function decryptPass(x , y){
+//     const key = y;
 //     var decipher = crypto.createDecipher('aes-256-cbc',key)
 //     var dec = decipher.update(y,'hex','utf8')
 //     dec += decipher.final('utf8')

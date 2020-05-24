@@ -143,7 +143,7 @@ function loadHomePage(){
 
 /* Receiving user data to display */
 function updateData(){
-    let userObj  ={
+    let userObj  = {
         userId : localStorage.getItem("uId")
     }
     let xhttp = new XMLHttpRequest();
@@ -151,16 +151,27 @@ function updateData(){
     xhttp.setRequestHeader("Content-Type","application/json; charset=utf-8");
     xhttp.send((JSON.stringify(userObj)));
     xhttp.onreadystatechange = function(){
-        let serverResponse = JSON.parse(this.response) 
-        if(serverResponse.status === true){
-            displayData(serverResponse);
+        if(this.readyState == 4 && this.status == 200){
+            let serverResponse = JSON.parse(this.response) 
+            if(serverResponse.status === true){
+                displayData(serverResponse);
+            }
         }
     }
 }
 
 /* function that actually displays user data on screen */
 function displayData(data){
-    console.log(displayData);
+    if(data.dataArray.length === 0){
+        document.getElementById("data-container").innerHTML = `<h4 class="no-data pl-1 pt-4"> You have no passwords stored, store one now!</h4>`
+    }
+    else{
+        document.getElementById("data-container").innerHTML = "";
+        for(let i = 0; i < data.dataArray.length; i++){
+            document.getElementById("data-container").innerHTML += `<div class="single-pass-container d-flex flex-column p-1 mb-2" id = "pass-det-${i}"> <h3>${data.dataArray[i].client}</h3> <p>Your encypted password is : <span> ${data.dataArray[i].password} </span></p> </div>`
+        }
+
+    }
 }
 
 /* function that sends data back to server to encrypt */
@@ -186,6 +197,7 @@ function savePassword(){
         xhttp.setRequestHeader("Content-Type","application/json; charset=utf-8");
         xhttp.send((JSON.stringify(dataObj)));
         xhttp.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
             if(this.response == "success"){
                 console.log("sucessfully stored");
                 document.getElementById("site-name-field").value = "";
@@ -193,6 +205,7 @@ function savePassword(){
                 /* Updating data after the request has been processed */
                 updateData();
             }
+        }
         }
     }
 }
