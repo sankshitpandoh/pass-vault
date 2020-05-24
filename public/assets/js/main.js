@@ -56,15 +56,17 @@ function logIn(){
         xhttp.send((JSON.stringify(logDetails)));
         xhttp.onreadystatechange = function(){
             if(this.readyState == 4 && this.status == 200){
-                if(this.response == "false"){
+                let serverResponse = JSON.parse(this.response) 
+                if(serverResponse.status === false){
                     /* If user doesn't exits */
                     alert("User doesn't exist, please try again or if a new user, sign Up for an account");
                     document.getElementById("user-name").value = "";
                     document.getElementById("password").value = "";
                 }
-                if(this.response == "true"){
+                if(serverResponse.status === true){
                     /* If user exits and is verified load homePage */
                     localStorage.setItem("UserName", uName);
+                    localStorage.setItem("uId", serverResponse.id);
                     loadHomePage();
                 }
             }
@@ -128,7 +130,7 @@ function loadHomePage(){
     request.onreadystatechange = function(){
         if(this.readyState == 4 && this.status == 200){
             document.getElementById("main-container").innerHTML = this.responseText;
-            document.getElementById("user-name").innerHTML = localStorage.getItem("UserName");
+            console.log(localStorage.getItem("UserName"));
         }
     }
     request.open("GET", "./pages/homePage.html", true);

@@ -24,6 +24,7 @@ app.post("/logInAttempt" , function(req,res){
     /* Hashing the password */
     let hashPwd = crypto.createHash('sha1').update(password).digest('hex');
     let exist = false;
+    let userId;
     fs.readFile('./data/userInfo.json' , function(err, Data){
         let dataArray = JSON.parse(Data);
 
@@ -31,14 +32,23 @@ app.post("/logInAttempt" , function(req,res){
         for(let i = 0; i < dataArray.length; i++){
             if(dataArray[i].userName === uName && dataArray[i].password === hashPwd){
                 exist = true;
+                userId = dataArray[i].uId
                 break;
             }
         }
         if(exist === true){
-            res.send("true");
+            let resObj = {
+                status : true,
+                id : userId
+            }
+            res.json(resObj);
+            // res.send("true");
         }
         else{
-            res.send("false");
+            let resObj = {
+                status : false
+            }
+            res.json(resObj);
         }        
     });
 })
@@ -77,6 +87,7 @@ app.post("/signMeUp", function(req, res){
     });
 })
 
+/* Generates unique id for a user whenever he signsUp */
 function makeId(){
     let result = '';
     let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
