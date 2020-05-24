@@ -133,10 +133,34 @@ function loadHomePage(){
         if(this.readyState == 4 && this.status == 200){
             document.getElementById("main-container").innerHTML = this.responseText;
             console.log(localStorage.getItem("UserName"));
+            /* Show user data once he has logged in */
+            updateData();
         }
     }
     request.open("GET", "./pages/homePage.html", true);
     request.send();
+}
+
+/* Receiving user data to display */
+function updateData(){
+    let userObj  ={
+        userId : localStorage.getItem("uId")
+    }
+    let xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "http://localhost:3000/storePassword" , true);
+    xhttp.setRequestHeader("Content-Type","application/json; charset=utf-8");
+    xhttp.send((JSON.stringify(userObj)));
+    xhttp.onreadystatechange = function(){
+        let serverResponse = JSON.parse(this.response) 
+        if(serverResponse.status === true){
+            displayData(serverResponse);
+        }
+    }
+}
+
+/* function that actually displays user data on screen */
+function displayData(data){
+    console.log(displayData);
 }
 
 /* function that sends data back to server to encrypt */
@@ -166,6 +190,8 @@ function savePassword(){
                 console.log("sucessfully stored");
                 document.getElementById("site-name-field").value = "";
                 document.getElementById("site-pass").value = "";
+                /* Updating data after the request has been processed */
+                updateData();
             }
         }
     }
