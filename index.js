@@ -23,8 +23,8 @@ app.post("/logInAttempt" , function(req,res){
 
     /* Hashing the password */
     let hashPwd = crypto.createHash('sha1').update(password).digest('hex');
-    console.log(hashPwd);
     let exist = false;
+    let userId;
     fs.readFile('./data/userInfo.json' , function(err, Data){
         let dataArray = JSON.parse(Data);
 
@@ -32,14 +32,23 @@ app.post("/logInAttempt" , function(req,res){
         for(let i = 0; i < dataArray.length; i++){
             if(dataArray[i].userName === uName && dataArray[i].password === hashPwd){
                 exist = true;
+                userId = dataArray[i].uId
                 break;
             }
         }
         if(exist === true){
-            res.send("true");
+            let resObj = {
+                status : true,
+                id : userId
+            }
+            res.json(resObj);
+            // res.send("true");
         }
         else{
-            res.send("false");
+            let resObj = {
+                status : false
+            }
+            res.json(resObj);
         }        
     });
 })
@@ -65,14 +74,30 @@ app.post("/signMeUp", function(req, res){
             let hashPwd = crypto.createHash('sha1').update(password).digest('hex');
             let userObj ={
                 userName : uName,
-                password : hashPwd
+                password : hashPwd,
+                uId : makeId()
             }
             dataArray.push(userObj);
             fs.writeFile("./data/userInfo.json", JSON.stringify(dataArray), function(err){
                 if (err) throw err;
-                console.log('User was sucessfully registered')
+                console.log('User was sucessfully registered');
+                res.send("success");
             });
-            res.send("success");
         }
     });
 })
+
+/* Generates unique id for a user whenever he signsUp */
+function makeId(){
+    let result = '';
+    let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let charactersLength = characters.length;
+    for(let i = 0; i < 10; i++){
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+}
+
+/* To do 
+uuid for each user to encrpy passwords with
+improve homepage layout */

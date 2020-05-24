@@ -98,3 +98,40 @@ body{
     transform: scale(1.25);
 }
 /* Sign up screen ends here */
+
+/* Home page css starts from here */
+#main-container .display-pannel{
+    background-color: #1f191b;
+    height: 100vh;
+}
+#main-container .display-pannel .add-password-container{
+    background-color: #000;
+}
+#main-container .display-pannel .add-password-container input{
+    border: none;
+    border-bottom: 1px solid #FED766;
+    background-color: transparent;
+    width: 40%;
+    color: #fff;
+    font-family: 'Montserrat-Regular';
+}
+#main-container .display-pannel .add-password-container input:nth-child(3){
+    background-color: #FED766;
+    border: 1px solid #FED766;
+    width: 15%;
+    cursor: pointer;
+    transition: 0.5s all;
+    font-family: 'Montserrat-Bold';
+    color: #000;
+}
+#main-container .display-pannel .add-password-container input:nth-child(3):hover{
+    background-color: #000;
+    width: 15%;
+    cursor: pointer;
+    color: #FED766;
+}
+#main-container .display-pannel .add-password-container input::placeholder{
+    color: #FED766;
+    font-family: 'Montserrat-Light';
+}
+/* Home page css ends here */
