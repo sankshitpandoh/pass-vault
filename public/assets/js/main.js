@@ -168,10 +168,17 @@ function displayData(data){
     else{
         document.getElementById("data-container").innerHTML = "";
         for(let i = 0; i < data.dataArray.length; i++){
-            document.getElementById("data-container").innerHTML += `<div class="single-pass-container d-flex flex-column p-1 mb-2" id = "pass-det-${i}"> <h3>${data.dataArray[i].client}</h3> <p>Your encypted password is : <span> ${data.dataArray[i].password} </span></p> </div>`
+            document.getElementById("data-container").innerHTML += `<div class="single-pass-container d-flex flex-column p-1 mb-2" id = "pass-det-${i}"> <h3 class="mb-3">${data.dataArray[i].client}</h3> <div class="d-flex justify-content-between align-items-center"> <p>Your encypted password is : <span> ${data.dataArray[i].password} </span></p> <div class="decrypt" onclick="decryptPass(this)">Decrypt Password</div> </div> </div>`
         }
 
     }
+}
+
+/* function that decrypts specific password and displays it */
+function decryptPass(x){
+    console.log(x)
+    console.log(x.parentNode)
+    console.log(x.parentNode.parentNode.id)
 }
 
 /* function that sends data back to server to encrypt */

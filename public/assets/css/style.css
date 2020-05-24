@@ -138,19 +138,29 @@ body{
     color: #fff;
 }
 #main-container .display-pannel #data-container .single-pass-container{
-    height: 40px;
+    max-height: 50px;
     overflow-y: hidden;
     background-color: #000;
     color: white;
     cursor: pointer;
+    transition: max-height 0.5s;
+}
+#main-container .display-pannel #data-container .single-pass-container:hover{
+    max-height: 100px;
 }
 #main-container .display-pannel #data-container .single-pass-container h3{
     font-family: 'Montserrat-Regular';
+    text-transform: capitalize;
 }
 #main-container .display-pannel #data-container .single-pass-container p{
     font-family: 'Montserrat-Light';
 }
 #main-container .display-pannel #data-container .single-pass-container p span{
     font-family: 'Montserrat-Bold';
+}
+#main-container .display-pannel #data-container .single-pass-container .decrypt{
+    background-color: red;
+    font-family: 'Montserrat-Regular';
+    color: black;
 }
 /* Home page css ends here */
