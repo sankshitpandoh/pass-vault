@@ -147,7 +147,7 @@ function updateData(){
         userId : localStorage.getItem("uId")
     }
     let xhttp = new XMLHttpRequest();
-    xhttp.open("POST", "http://localhost:3000/storePassword" , true);
+    xhttp.open("POST", "http://localhost:3000/getData" , true);
     xhttp.setRequestHeader("Content-Type","application/json; charset=utf-8");
     xhttp.send((JSON.stringify(userObj)));
     xhttp.onreadystatechange = function(){
