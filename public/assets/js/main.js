@@ -163,7 +163,9 @@ function savePassword(){
         xhttp.send((JSON.stringify(dataObj)));
         xhttp.onreadystatechange = function(){
             if(this.response == "success"){
-                console.log("sucessfully stored")
+                console.log("sucessfully stored");
+                document.getElementById("site-name-field").value = "";
+                document.getElementById("site-pass").value = "";
             }
         }
     }
