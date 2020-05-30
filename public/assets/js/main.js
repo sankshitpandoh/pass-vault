@@ -168,10 +168,36 @@ function displayData(data){
     else{
         document.getElementById("data-container").innerHTML = "";
         for(let i = 0; i < data.dataArray.length; i++){
-            document.getElementById("data-container").innerHTML += `<div class="single-pass-container d-flex flex-column p-1 mb-2" id = "pass-det-${i}"> <h3>${data.dataArray[i].client}</h3> <p>Your encypted password is : <span> ${data.dataArray[i].password} </span></p> </div>`
+            document.getElementById("data-container").innerHTML += `<div class="single-pass-container d-flex flex-column p-1 mb-2" id = "pass-det-${i}"> <h3 class="mb-3">${data.dataArray[i].client}</h3> <div class="d-flex justify-content-between align-items-center"> <p id="${i}">Your encypted password is : <span> ${data.dataArray[i].password} </span></p> <div class="decrypt" onclick="decryptPass(this)">Decrypt Password</div> </div> </div>`
         }
 
     }
+}
+
+/* function that decrypts specific password and displays it */
+function decryptPass(x){
+    let id = x.parentNode.parentNode.id;
+    let dataObj = {
+        identifier : id ,
+        userId : localStorage.getItem("uId")
+    }
+    let xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "http://localhost:3000/getPassword" , true);
+    xhttp.setRequestHeader("Content-Type","application/json; charset=utf-8");
+    xhttp.send((JSON.stringify(dataObj)));
+    xhttp.onreadystatechange = function(){
+    if(this.readyState == 4 && this.status == 200){
+        let serverResponse = JSON.parse(this.response) 
+        if(serverResponse.status == "success"){
+            let str = id.substring(9,id.length);
+            console.log(str)
+            document.getElementById(str).innerHTML = `Your decrypted password is : <span> ${serverResponse.decPass} </span>`;
+        }
+    }
+    }
+    /* todo
+    complete this function to decrypt password
+    improve decrypt layout button */
 }
 
 /* function that sends data back to server to encrypt */

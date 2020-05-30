@@ -115,7 +115,6 @@ app.post("/getData" , function(req, res){
             dataArray : passArray,
             status : true
         }
-        console.log(responseObject);
         res.json(responseObject);
     })
 })
@@ -159,15 +158,42 @@ function encryptPass(x){
     return cryptedPass;
 }
 
-    // decrptPass(x, crypted);
-    // let decryptedPassArray = decryptPass(passArray , req.body.userId);
-// function decryptPass(x , y){
-//     const key = y;
-//     var decipher = crypto.createDecipher('aes-256-cbc',key)
-//     var dec = decipher.update(y,'hex','utf8')
-//     dec += decipher.final('utf8')
-//     console.log(dec)
-// }
+/* API called when user wants to decrypt a password*/
+app.post("/getPassword" , function(req,res){
+    /* Storing encrpyed password in variable password */
+    console.log(req.body);
+    let encPass;
+    let decPass;
+    let id = req.body.identifier;
+    id = id.substring(9,id.length);
+    fs.readFile('./data/userInfo.json' , function(err, Data){
+        let dataArray = JSON.parse(Data);
+        for(let i = 1; i < dataArray.length; i++){
+            if(dataArray[i].uId === req.body.userId){
+                encPass = dataArray[i].storePasswords[id].password;
+                console.log(encPass);
+                decPass = decryptPass(encPass , req.body.userId)
+                break;
+            }
+        }
+        let responseObject = {
+            decPass : decPass,
+            status : "success"
+        }
+        res.json(responseObject)
+    })
+
+    
+});
+
+/* function that decrypts password  */
+function decryptPass(x , y){
+    const key = y;
+    var decipher = crypto.createDecipher('aes-256-cbc',key)
+    var dec = decipher.update(x,'hex','utf8')
+    dec += decipher.final('utf8')
+    return dec;
+}
 
 /* To do 
 uuid for each user to encrpy passwords with
