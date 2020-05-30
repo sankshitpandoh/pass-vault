@@ -176,9 +176,23 @@ function displayData(data){
 
 /* function that decrypts specific password and displays it */
 function decryptPass(x){
-    console.log(x)
-    console.log(x.parentNode)
-    console.log(x.parentNode.parentNode.id)
+    let id = x.parentNode.parentNode.id
+    let dataObj = {
+        identifier : id ,
+        userId : localStorage.getItem("uId")
+    }
+    let xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "http://localhost:3000/getPassword" , true);
+    xhttp.setRequestHeader("Content-Type","application/json; charset=utf-8");
+    xhttp.send((JSON.stringify(dataObj)));
+    xhttp.onreadystatechange = function(){
+    if(this.readyState == 4 && this.status == 200){
+        console.log(this.response)
+    }
+    }
+    /* todo
+    complete this function to decrypt password
+    improve decrypt layout button */
 }
 
 /* function that sends data back to server to encrypt */
