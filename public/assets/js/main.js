@@ -6,6 +6,8 @@ localStorage.removeItem("UserName");
 /* Remove UniqueId from localStorage if there is one saved */
 localStorage.removeItem("uId");
 
+let isPassDecrpyted = false
+
 /* Function that calls login page layout  */
 function loadLogIn(){
     let request = new XMLHttpRequest;
@@ -168,9 +170,16 @@ function displayData(data){
     else{
         document.getElementById("data-container").innerHTML = "";
         for(let i = 0; i < data.dataArray.length; i++){
-            document.getElementById("data-container").innerHTML += `<div class="single-pass-container d-flex flex-column p-1 mb-2" id = "pass-det-${i}"> <h3 class="mb-3">${data.dataArray[i].client}</h3> <div class="d-flex justify-content-between align-items-center"> <p id="${i}">Your encypted password is : <span> ${data.dataArray[i].password} </span></p> <div class="decrypt" onclick="decryptPass(this)">Decrypt Password</div> </div> </div>`
+            document.getElementById("data-container").innerHTML += `<div class="single-pass-container d-flex flex-column p-1 mb-2" id = "pass-det-${i}" onmouseleave = "undoDecryption()"> <h3 class="mb-3">${data.dataArray[i].client}</h3> <div class="d-flex justify-content-between align-items-center"> <p id="${i}">Your encypted password is : <span> ${data.dataArray[i].password} </span></p> <div class="decrypt" onclick="decryptPass(this)">Decrypt Password</div> </div> </div>`
         }
 
+    }
+}
+
+function undoDecryption(){
+    if(isPassDecrpyted){
+        updateData()
+        isPassDecrpyted = false;
     }
 }
 
@@ -192,6 +201,8 @@ function decryptPass(x){
             let str = id.substring(9,id.length);
             console.log(str)
             document.getElementById(str).innerHTML = `Your decrypted password is : <span> ${serverResponse.decPass} </span>`;
+            document.getElementById(str).nextElementSibling.innerHTML = ""
+            isPassDecrpyted = true
         }
     }
     }
