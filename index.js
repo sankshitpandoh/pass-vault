@@ -115,7 +115,6 @@ app.post("/getData" , function(req, res){
             dataArray : passArray,
             status : true
         }
-        console.log(responseObject);
         res.json(responseObject);
     })
 })
